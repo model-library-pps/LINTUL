@@ -1,0 +1,12 @@
+AgroManagement:
+- 1987-01-01:
+    CropCalendar:
+      crop_name: springwheat
+      variety_name: springwheat_cultivar
+      crop_start_date: 1987-01-01
+      crop_start_type: sowing
+      crop_end_date: 1987-10-07
+      crop_end_type: harvest
+      max_duration: 400
+    StateEvents: null
+    TimedEvents: null
