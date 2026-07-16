@@ -1,10 +1,64 @@
+# -*- coding: utf-8 -*-
+# Herman Berghuijs (herman.berghuijs@wur.nl)
+# July 2026
+
 import numpy as np
 from pcse.traitlets import Float
 from pcse.base import SimulationObject, ParamTemplate, StatesTemplate, RatesTemplate
 from pcse.util import AfgenTrait
 
 class NitrogenStress(SimulationObject):
+    """
+    Class to simulate the Nitrogen Nutrition Index
 
+    Simulates the daily value of the Nitrogen Nutrition Index (NNI). This index varies from 0 to 1. If
+    NNI = 1.0, there is no nitrogen stress. If NNI = 0.0, the degree of nitrogen stress is maximum.
+    NNI can drop below 1, once the N concentration in the green parts of the plant drop below an
+    optimum concentration. If the NNI value is smaller than 1, various crop variables are affected:
+    - The LAI reduces during juvenile growth stages (see light_interception_and_growth.py)
+    - The SLA the LAI reduces during mature growth stages (see light_interception_and_growth.py)
+    - The partitioning of newly produced dry matter to leaves is reduced (see biomass_partitioning.py)
+    - Leaf senescence is enhanced (see leaf_senescence.py)
+
+    *Simulation parameters*
+
+    ==============  ==============================================  ======  ===========================
+     Name            Description                                    Type     Unit
+    ==============  ==============================================  ======  ===========================
+    FRNX            Fraction of optimum N concentration and
+                    maximum N concentration in leaves and stems     SCr     -
+    LRNR            Fraction of maximum N concentration in roots
+                    and maximum N concentration in leaves           SCr     -
+    LSNR            Fraction of maximum N concentration in stems    SCr     -
+                    and maximum N concentration in leaves           SCr     -
+    NMXLV           Maximum N concentration in leaves as a
+                    function of development stage                   TCr     g N g-1 DM
+    RNFLV           Residual N concentration in leaves              SCr     g N g-1 DM
+    RNFST           Residual N concentration in stems               SCr     g N g-1 DM
+    ==============  ==============================================  ======  ===========================
+
+    *Auxiliary variables*
+
+    ==============  ==============================================  ======  ===========================
+     Name            Description                                    Pbl     Unit
+    ==============  ==============================================  ======  ===========================
+    NFGMR           N concentration of green dry matter (i.e. in
+                    leaves and stems)                               N       g N g-1 DM
+    NNI             Nitrogen Nutrition Index                        Y       -
+    NMAXLV          Maximum N concentration in leaves               Y       g N g-1 DM
+    NMAXRT          Maximum N concentration in roots                Y       g N g-1 DM
+    NMAXST          Maximum N concentration in stems                Y       g N g-1 DM
+    NOPTL           Optimum N concentration in leaves               N       g N g-1 DM
+    NOPTLV          Optimum N amount in leaves                      N       g N m-2 ground
+    NOPTMR          Optimum N concentration in green dry matter
+                    (i.e. in stems and leaves).                     N       g N g-1 DM
+    NOPTS           Optimum N concentration in stems                N       g N g-1 DM
+    NOPTST          Optimum N amount in stems                       N       g N m-2 ground
+    NRMR            Residual N concentration in green dry matter
+                    (i.e. in leaves and stems)                      N       g N g-1 DM
+    ==============  ==============================================  ======  ===========================
+
+    """
     class Parameters(ParamTemplate):
         FRNX = Float()
         LRNR = Float()
