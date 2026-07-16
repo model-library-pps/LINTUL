@@ -1,9 +1,60 @@
+# -*- coding: utf-8 -*-
+# Herman Berghuijs (herman.berghuijs@wur.nl)
+# July 2026
+
 import numpy as np
 from pcse.traitlets import Float
 from pcse.base import SimulationObject, ParamTemplate, StatesTemplate, RatesTemplate
 from pcse.util import AfgenTrait
 
 class GrowthLeafArea(SimulationObject):
+    """
+    Class to simulate the growth of the leaf area
+
+    Simulates the growth of the leaf area index. During the juvenile phase, the leaf area index grows
+    exponential, given that there is no water or nitrogen stress. After the juvenile phase, the growth
+    of the leaf area index is proportional to the growth of the leaf dry matter.
+
+    *Simulation parameters*
+
+    ==============  ==============================================  ======  ===========================
+     Name            Description                                    Type     Unit
+    ==============  ==============================================  ======  ===========================
+    NLAI            Parameter that describes the decrease in the
+                    growth rate of the leaf area index and the
+                    Nitrogen Nutrition Index during the juvenile
+                    phase.                                          TCr     -
+    NSLA            Parameter that describes the reduction in the
+                    specific leaf area as a function of the
+                    Nitrogen Nutrition Index.                       SCr     -
+    RGRL            Relative growth rate of the leaf area index
+                    during the juvenile growth phase.               SCr     (C d)-1
+    SLACF           Modificaiton factor of specific leaf area under
+                    potential growth  conditions as a function of
+                    development stage                               TCr     -
+    SLAC            Reference specific leaf area                    SCr     m2 leaf g-1 leaf
+    TSUMAN          Temperature sum between emergence and
+                    anthesis.                                       SCr     degC d
+    TSUMI           Initial temperature sum from emergence.         SCr     degC d
+    WLVGI           Initial leaf dry weight                         SCr     g DM m-2
+    ==============  ==============================================  ======  ===========================
+
+     *State variables*
+    ==============  ==============================================  ======  ==============================
+     Name            Description                                    Pbl     Unit
+    ==============  ==============================================  ======  ==============================
+    LAI             Leaf area index                                 Y       m2 leaf m-2 ground
+    ==============  ==============================================  ======  ==============================
+
+     *Rate variables*
+    ==============  ==============================================  ======  ==============================
+     Name            Description                                    Pbl     Unit
+    ==============  ==============================================  ======  ==============================
+    RGLAI            Growth rate leaf area index                    Y       m2 leaf m-2 ground d-1
+    ==============  ==============================================  ======  ==============================
+    """
+
+
     class Parameters(ParamTemplate):
         NLAI = Float()
         NSLA = Float()
