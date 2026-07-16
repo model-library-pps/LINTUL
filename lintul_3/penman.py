@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+# Herman Berghuijs (herman.berghuijs@wur.nl)
+# July 2026
+
 from datetime import datetime
 import numpy as np
 from pcse.base import SimulationObject
@@ -8,6 +12,34 @@ from pcse.util import AfgenTrait
 hPa_to_kPa = 1e-1
 
 class Penman(SimulationObject):
+    """
+    Class to simulate the potential rates of transpiration and soil evaporation.
+
+    Simulates the potential transpiration rate and the potential soil evaporation rate using the
+    Penman method (Penman, 1948).
+
+    *Simulation parameters*
+
+    ==============  ==============================================  ======  ===========================
+     Name            Description                                    Type     Unit
+    ==============  ==============================================  ======  ===========================
+    WLVGI           Initial dry weight leaves                       SCr     g DM m-2 ground
+    SLAC            Reference specific leaf area                    SCr     m2 leaf g-1 leaf
+    ==============  ==============================================  ======  ===========================
+
+    *Auxiliary variables*
+
+    ==============  ==============================================  ======  ===========================
+     Name            Description                                    Pbl     Unit
+    ==============  ==============================================  ======  ===========================
+    PEVAP           Potential soil evaporation rate                 Y        mm d-1
+    PTRAN           Potential transpiration rate                    Y        mm d-1
+    ==============  ==============================================  ======  ===========================
+
+    References
+    Penman, H.L. (1948): Natural evaporation from open water, bare soil and grass. Proc. Roy. Soc.
+        London A(194), S. 120–145.
+    """
     class Parameters(ParamTemplate):
         WLVGI = Float()
         SLAC = Float()
@@ -27,7 +59,6 @@ class Penman(SimulationObject):
     def calc_rates(self, day, drv, delt):
         r = self.rates
         k = self.kiosk
-        p = self.params
 
         DAVTMP = drv.TEMP
         DTR = drv.IRRAD
