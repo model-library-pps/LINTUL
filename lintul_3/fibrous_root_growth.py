@@ -1,10 +1,45 @@
+# -*- coding: utf-8 -*-
+# Herman Berghuijs (herman.berghuijs@wur.nl)
+# July 2026
+
 from pcse.base import ParamTemplate, RatesTemplate, SimulationObject, StatesTemplate
 from pcse.traitlets import Float
 
 class FibrousRootGrowth(SimulationObject):
+    """
+    Class to calculate the growth of the rooting depth.
+
+    Simulates the growth of the rooting depth. From emergence rooting depth increases with a constant
+    rate, unless there is severe drought. Once the maximum rooting depth is reached, the rooting depth
+    does not longer increase.
+
+    *Simulation parameters*
+
+    ==============  ==============================================  ======  ===========================
+     Name            Description                                    Type     Unit
+    ==============  ==============================================  ======  ===========================
+    ROOTDI          Initial rooting depth                           SCr     m rooted soil
+    ROOTDM:         Maximum rooting depth                           SCr     m rooted soil
+    RRDMAX          Maximum growth of rooting depth                 SCr     m rooted soil d-1
+    ==============  ==============================================  ======  ===========================
+
+     *State variables*
+    ==============  ==============================================  ======  ==============================
+     Name            Description                                    Pbl     Unit
+    ==============  ==============================================  ======  ==============================
+    ROOTD           Rooting depth                                   Y       m  rooted soil
+    ==============  ==============================================  ======  ==============================
+
+    *Rate variables*
+    ==============  ==============================================  ======  ==============================
+     Name            Description                                    Pbl     Unit
+    ==============  ==============================================  ======  ==============================
+    RROOTD          Growth rate rooting depth                       Y       m rooted soil d-1
+    ==============  ==============================================  ======  ==============================
+    """
+
     class Parameters(ParamTemplate):
         ROOTDI = Float()
-        RRDMAX = Float()
         ROOTDM = Float()
         RRDMAX = Float()
         WCWP = Float()
