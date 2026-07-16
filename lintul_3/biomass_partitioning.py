@@ -7,16 +7,57 @@ FPAR = 0.5
 J_to_MJ = 1e-6
 
 class BiomassPartitioning(SimulationObject):
+    """
+    Class to simulate the biomass partitioning fractions to leaves, roots, stems, and storage organs.
+
+    Simulates the fraction of newly produced dry matter that is partitioned to different organs. Under
+    potential growth conditions, each of these fractions depends on the development stage. Under
+    water-limited growth conditions, the fraction of newly produced dry matter that is partitioned to
+    the roots increases at the cost of the newly produced dry matter that is partitioned to the shoot
+    (i.e. shoot, stems, storage organs). Under N-limited conditions, there is a decreased dry matter
+    partitioning to the leaves compared to potential conditions.
+
+    *Simulation parameters*
+
+    ==============  ==============================================  ======  ===========================
+     Name            Description                                    Type     Unit
+    ==============  ==============================================  ======  ===========================
+    FLVTB           Partitioning fraction to leaves as a function   TCr     g DM g-1 DM
+                    of development stage under potential growth
+                    conditions.
+    FRTTB           Partitioning fraction the to roots as a         TCr     g DM g-1 DM
+                    function of development stage under potential
+                    growth ocnditions
+    FSOTB           Partitioning fraction to the storage organs as
+                    a function of development stage under potential TCr     g DM g-1 DM
+                    growth conditions.
+    FSTTB           Partitioning fraction to the stems as a
+                    function of development stage under potential   TCr     g DM g-1 DM
+                    growth conditions.
+    NPART           Parameter that describes the decrease of the
+                    dry matter partitioning to the leaves as a
+                    function of the Nitrogen Nutrition Index.       SCr     -
+    ==============  ==============================================  ======  ===========================
+
+    *Auxiliary variables
+
+    ==============  ==============================================  ======  ===========================
+     Name            Description                                     Pbl     Unit
+    ==============  ==============================================  ======  ===========================
+    FLV             Fraction of dry matter partitioned to leaves    Y       g DM g-1 DM
+    FRT             Fraction of dry matter partitioned to roots     Y       g DM g-1 DM
+    FST             Fraction of dry matter partitioned to stems     Y       g DM g-1 DM
+    FSO             Fraction of dry matter pratitioned to storage
+                    organs.                                         Y       g DM g-1 DM
+    ==============  ==============================================  ======  ===========================
+    """
+
     class Parameters(ParamTemplate):
         FLVTB = AfgenTrait()
         FRTTB = AfgenTrait()
         FSTTB = AfgenTrait()
         FSOTB = AfgenTrait()
         NPART = Float()
-        WLVGI = Float()
-        WRTLI = Float()
-        WSOI = Float()
-        WSTI = Float()
 
     class StateVariables(StatesTemplate):
         pass
