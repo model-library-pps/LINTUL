@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+# Herman Berghuijs (herman.berghuijs@wur.nl)
+# July 2026
+
 from lintul_3.drunir import Drunir
 from pcse.base import ParamTemplate, RatesTemplate, SimulationObject, StatesTemplate
 from pcse.traitlets import Float, Instance
@@ -6,6 +10,27 @@ cm_to_mm = 1e1
 m_to_mm = 1e3
 
 class SoilWaterDynamics(SimulationObject):
+    """
+    Class to simulate the dynamics of water in the rooted soil
+
+    Simulates the amount of water in the rooted soil. Sources for water in the rooted soil include
+    rain and irrigation. Another source consists of root exploration; i.e. more water come available
+    due to roots that grow deeper in the rootable soil. Sinks of water are evaporation, transpiration,
+    drainage, and surface run-off.
+
+    *Simulation parameters*
+
+    ==============  ==============================================  ======  ===========================
+     Name            Description                                    Type     Unit
+    ==============  ==============================================  ======  ===========================
+    ROOTDI          Initial rooted depth                            SCr     m soil
+    WCI             Initial soil moisture content of rooted soil    SCr     m3 water m-3 soil
+    WCSUBS          Soil moisture content of subsoil                SCr     m3 water m-2 soil
+    ==============  ==============================================  ======  ===========================
+
+
+    """
+
     drunir = Instance(SimulationObject)
 
     class Parameters(ParamTemplate):
