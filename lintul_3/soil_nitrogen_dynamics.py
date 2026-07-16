@@ -1,12 +1,66 @@
+# -*- coding: utf-8 -*-
+# Herman Berghuijs (herman.berghuijs@wur.nl)
+# July 2026
+
 from pcse.base import ParamTemplate, RatesTemplate, SimulationObject, StatesTemplate
 from pcse.traitlets import Float
 from pcse.util import AfgenTrait
 
 class SoilNitrogenDynamics(SimulationObject):
+    """
+    Class to simulate the dynamics of available nitrogen in the soil
+
+    Simulates the amount of nitrogen in the soil that is available for uptake. Sources for available
+    nitrogen are nitrogen fertilization and mineralization. The only sink for available nitrogen is
+    root uptake.
+
+    *Simulation parameters*
+
+    ==============  ==============================================  ======  ===========================
+     Name            Description                                    Type     Unit
+    ==============  ==============================================  ======  ===========================
+    DVSNLT          Development stage above which there is no
+                    net mineralization.                             SCr     -
+    FERTAB          Nitrogen fertilization rate as a function of
+                    day of the year                                 TCr     g N m-2 ground d-1
+    NERTAB          Fraction of applied nitrogen that becomes
+                    available as a function of year                 TCr     g N g-1 N
+    ==============  ==============================================  ======  ===========================
+
+    *State variables*
+
+    ==============  ==============================================  ======  ==============================
+     Name            Description                                    Pbl     Unit
+    ==============  ==============================================  ======  ==============================
+    NAVAIL          Amount of available nitrogen in next time step  Y       g N m-2 ground
+    TNSOIL          Amount of available nitrogen                    N       g N m-2 ground
+    ==============  ==============================================  ======  ==============================
+
+    *Rate variables*
+
+    ==============  ==============================================  ======  ==============================
+     Name            Description                                    Pbl     Unit
+    ==============  ==============================================  ======  ==============================
+    RFERTN          Effective fertilization rate                    N       g N m-2 ground d-1
+    RNUPT           Root nitrogen uptake                            N       g N m-2 ground d-1
+    RTMIN           Net nitrogen mineralization rate                N       g N m-2 ground d-1
+    ==============  ==============================================  ======  ==============================
+
+    *Auxiliary variables*
+
+    ==============  ==============================================  ======  ==============================
+     Name            Description                                    Pbl     Unit
+    ==============  ==============================================  ======  ==============================
+    NRF             Fraction of applied nitrogen that becomes
+                    available                                       N       -
+    ==============  ==============================================  ======  ==============================
+    """
+
     class Parameters(ParamTemplate):
         DVSNLT = Float()
-        NRFTAB = AfgenTrait
         FERTAB = AfgenTrait()
+        NRFTAB = AfgenTrait
+
 
     class StateVariables(StatesTemplate):
         NAVAIL = Float()
@@ -14,7 +68,6 @@ class SoilNitrogenDynamics(SimulationObject):
 
     class RateVariables(RatesTemplate):
         RFERTN = Float()
-        RFERTNTOT = Float()
         RNUPT = Float()
         RTMIN = Float()
         NRF = Float()
