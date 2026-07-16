@@ -1,6 +1,9 @@
-from pcse.traitlets import Instance,  Float, Int
+# -*- coding: utf-8 -*-
+# Herman Berghuijs (herman.berghuijs@wur.nl)
+# July 2026
+
+from pcse.traitlets import Instance
 from pcse.base import SimulationObject, ParamTemplate, StatesTemplate, RatesTemplate
-from pcse.util import AfgenTrait
 
 from lintul_3.astro import Astro
 from lintul_3.biomass_partitioning import BiomassPartitioning
@@ -16,6 +19,27 @@ from lintul_3.root_senescence import RootSenescence
 from lintul_3.nitrogen_stress import NitrogenStress
 
 class LINTUL_3(SimulationObject):
+    """
+    Top level object organizing the different components of LINTUL-3
+
+    The CropSimulation object organizes the different processes of the crop
+    simulation. Moreover, it contains the parameters, rate and state variables
+    which are relevant at the level of the entire crop. The processes that are
+    implemented as embedded simulation objects consist of:
+
+    Astro (self.astro)
+    BiomassPartitioning (self.biomass_partitioning)
+    CropNitrogenDynamics (self.crop_nitrogen_dynamics)
+    FibrousRootGrowth (self.fibrous_root_growth)
+    GrowthLeafArea (self.growth_leaf_area)
+    LeafSenescence (self.leaf_senescence)
+    LightInterceptionAndGrowth (self.light_interception_and_growth)
+    NitrogenStress (self.nitrogen_stress)
+    Penman (self.penman)
+    Phenology (self.phenology)
+    RootSenescence (self.root_senescence)
+    """
+
     astro = Instance(SimulationObject)
     biomass_partitioning = Instance(SimulationObject)
     crop_nitrogen_dynamics = Instance(SimulationObject)
