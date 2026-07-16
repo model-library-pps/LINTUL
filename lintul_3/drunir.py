@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+# Herman Berghuijs (herman.berghuijs@wur.nl)
+# July 2026
+
 from datetime import datetime
 import numpy as np
 from pcse.base import SimulationObject
