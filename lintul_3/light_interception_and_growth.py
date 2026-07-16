@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+# Herman Berghuijs (herman.berghuijs@wur.nl)
+# July 2026
+
 import numpy as np
 from pcse.traitlets import Float
 from pcse.base import SimulationObject, ParamTemplate, StatesTemplate, RatesTemplate
@@ -6,6 +10,69 @@ FPAR = 0.5
 J_to_MJ = 1e-6
 
 class LightInterceptionAndGrowth(SimulationObject):
+    """
+    Class to calculate the daily light interception and dry matter production.
+
+    Simulates the daily light interception and the dry matter production rates for each organ (i.e.
+    leaves, roots, storage organs, and stems). Light interception is simulated according to Lambert
+    Beer's law. The total dry matter production under potential conditions is calculated as the
+    product of the light use efficiency and the amount of intercepted PAR. Under water- or
+    nitrogen-limited conditions, the total dry matter production is reduced. The newly produced dry
+    matter that is assigned to an organ is calculated by mulitplying the total dry matter production
+    with the dry partitioning fraction of dry of that organ that was previously (see
+    biomass_partitioning.py) calculated.
+
+    *Simulation parameters*
+
+    ==============  ==============================================  ======  ===========================
+     Name            Description                                    Type     Unit
+    ==============  ==============================================  ======  ===========================
+    K               Light extinction coefficient                    SCr     m2 ground m-2 leaf
+    LUE             Light use efficiency                            SCr     g DM MJ-1 PAR
+    NLUE            Parameter in function that describes the
+                    relationship between Nitrogen Nutrition Index
+                    and the total dry matter production under
+                    nitrogen-limited conditions.                    SCr     -
+    WLVGI           Inital leaf dry matter weight                   SCr     g DM m-2 ground
+    WRTLI           Inital root matter weight                       SCr     g DM m-2 ground
+    WSOI            Inital storage organ dry matter weight          SCr     g DM m-2 ground
+    WSTI            Inital stem dry matter weight                   SCr     g DM m-2 ground
+    ==============  ==============================================  ======  ===========================
+
+     *State variables*
+
+    ==============  ==============================================  ======  ==============================
+     Name            Description                                    Pbl     Unit
+    ==============  ==============================================  ======  ==============================
+    WLVG            Leaf dry matter weight                          Y       g DM m-2 ground
+    WRT             Root dry matter weight                          Y       g DM m-2 ground
+    WSO             Storage organ dry matter weight                 Y       g DM m-2 ground
+    WST             Stem dry matter weight                          Y       g DM m-2 ground
+    WTOT            Total weight of dry matter produced (including
+                    dry matter that died).                          N       g DM m-2 ground
+    ==============  ==============================================  ======  ==============================
+
+     *Rate variables*
+
+    ==============  ==============================================  ======  ==============================
+     Name            Description                                    Pbl     Unit
+    ==============  ==============================================  ======  ==============================
+    RGWRT           Growth rate root dry matter                     Y       g DM m-2 ground d-1
+    RGWLVG          Growth rate leaf dry matter                     Y       g DM m-2 ground d-1
+    RGWSO           Growth rate storage organ dry matter            Y       g DM m-2 ground d-1
+    RGWST           Growth rate stem dry matter                     Y       g DM m-2 ground d-1
+    RGWTOT          Total growth rate dry matter                    Y       g DM m-2 ground d-1
+    ==============  ==============================================  ======  ==============================
+
+     *Auxiliary variables*
+    ==============  ==============================================  ======  ==============================
+     Name            Description                                    Pbl     Unit
+    ==============  ==============================================  ======  ==============================
+    FINT            Fraction of PAR intercepted                     N       MJ radiation MJ-1 radiation
+    PARINT          Amount of PAR intercepted                       N       MJ PAR m-2 ground d-1
+    ==============  ==============================================  ======  ==============================
+    """
+
     class Parameters(ParamTemplate):
         K = Float()
         LUE = Float()
