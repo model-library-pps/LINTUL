@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+# Herman Berghuijs (herman.berghuijs@wur.nl)
+# July 2026
+
 from datetime import datetime
 import numpy as np
 from pcse.base import SimulationObject
@@ -6,6 +10,58 @@ from pcse.base import SimulationObject, ParamTemplate, StatesTemplate, RatesTemp
 from pcse.util import AfgenTrait
 
 class Phenology(SimulationObject):
+    """
+    Class to simulate phenological development
+
+    Simulates the phenological development of the crop. The development state is determined by the
+    effectve, accumulated amount of heat. The development rate is determined by the effective
+    temperature which is, in turn, determined by the base temperature daily minimium and maximum
+    tmeperature. It can also be reduced under suboptimal daylengths.
+
+    *Simulation parameters*
+
+    ==============  ==============================================  ======  ===========================
+     Name            Description                                    Type     Unit
+    ==============  ==============================================  ======  ===========================
+    DOYEM           Day of emergence                                SCr     d
+    PHOTTB          Reduction factor of the development rate as
+                    a function of daylength                         TSCr    d
+    TBASE           Base temperature (i.e. temperature below
+                    which there is no development)                  SCr     degC
+    TSUMAN          Temperature sum from emergence to anthesis      SCr     degC d
+    TSUMMT          Temperature sum from anthesis to maturity       SCr     degC d
+    TSUMI           Initial  tmeperature sum from emergence.        SCr     degC d
+    WCWP            Soil moisture content at wilting point          SCr     degC d
+    ==============  ==============================================  ======  ===========================
+
+    *State variables*
+    ==============  ==============================================  ======  ==============================
+     Name            Description                                    Pbl     Unit
+    ==============  ==============================================  ======  ==============================
+    EMERG           Indicates whether (=1) or not (=0) the crop
+                    has emerged.                                    Y       -
+    TSUM            Temperature sum from emergence                  Y       -
+    ==============  ==============================================  ======  ==============================
+
+    *Rate variables*
+
+    ==============  ==============================================  ======  ==============================
+     Name            Description                                    Pbl     Unit
+    ==============  ==============================================  ======  ==============================
+    REMERG          Equals 1 at the day that the crop emerges       Y       -
+    RTSUM           Growth rate temperature sum from emergence      Y       degC
+    ==============  ==============================================  ======  ==============================
+
+    *Auxiliary variables*
+
+    ==============  ==============================================  ======  ==============================
+     Name            Description                                    Pbl     Unit
+    ==============  ==============================================  ======  ==============================
+    DVS             Development stage                               Y       -
+    DTEFF           Effective temperature                           Y       degC
+    ==============  ==============================================  ======  ==============================
+
+    """
     class Parameters(ParamTemplate):
         DOYEM = Int()
         PHOTTB = AfgenTrait()
