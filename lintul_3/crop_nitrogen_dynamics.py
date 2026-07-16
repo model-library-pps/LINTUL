@@ -1,13 +1,93 @@
+# -*- coding: utf-8 -*-
+# Herman Berghuijs (herman.berghuijs@wur.nl)
+# July 2026
+
 import numpy as np
 from pcse.traitlets import Float
 from pcse.base import SimulationObject, ParamTemplate, StatesTemplate, RatesTemplate
 from pcse.util import AfgenTrait
 
 class CropNitrogenDynamics(SimulationObject):
+    """
+    Class to simulate the dynamics of nitrogen in the leaves, roots, storage organs, and stems.
+
+    Simulates the amount of N in leaves, roots, storage organs, and stems. The source for N uptake by
+    vegetative organs (leaves, roots, stems) are N uptake from the soil. The source for N uptake by
+    the storage organs is N translocation from the vegetative organs. Thus, N translocation is a sink
+    for the vegetative organs. Furthermore, another sink of N for leaves and roots in N loss due to
+    senescence.
+
+    *Simulation parameters*
+
+    ==============  ==============================================  ======  ===========================
+     Name            Description                                    Type     Unit
+    ==============  ==============================================  ======  ===========================
+    DVSNLT          Development stage above which there is no
+                    more N uptake from the soil.                    SCr     -
+    DVSNT           Development stage below which there is no N
+                    translocation from vegetative organs to
+                    storage organs.                                 SCr     -
+    FNTRT           Fraction of root to stem and leaf
+                    translocatable amount of N.                     SCr     g N g-1 N
+    NFRLVI          Initial N concentration in leaves               SCr     g N g-1 DM
+    NFRRTI          Initial N concentration in roots                SCr     g N g-1 DM
+    NFRSTI          Initial N concentration in stems                SCr     g N g-1 DM
+    NMAXSO          Maximum N concentration in storage organs       SCr     g N g-1 DM
+    RNFLV           Residual fraction of N in leaves                SCr     g N g-1 DM
+    RNFRT           Residual fraction of N in roots                 SCr     g N g-1 DM
+    RNFST           Residual fraction of N in stems                 SCr     g N g-1 DM
+    TCNT            Time coefficient for N translocation to the
+                    storage organs                                  SCr     d
+    WLVGI           Initial dry weight leaves                       SCr     g DM m-2 ground
+    WRTLI           Initial dry weight roots                        SCr     g DM m-2 ground
+    WSTI            Initial dry weight stems                        SCr     g DM m-2 ground
+    WCWP            Soil moisture content at wilting point          SCr     mm3 water m-2 soil
+    ==============  ==============================================  ======  ===========================
+
+    *State variables*
+    ==============  ==============================================  ======  ===========================
+     Name            Description                                    Pbl     Unit
+    ==============  ==============================================  ======  ===========================
+    ANLV            Amount of N in leaves                           Y       g N m-2 ground
+    ANRT            Amount of N in roots                            Y       g N m-2 ground
+    ANSO            Amount of N in storage organs                   Y       g N m-2 ground
+    ANST            Amount of N in stems                            Y       g N m-2 ground
+    ==============  ==============================================  ======  ===========================
+
+    *Rate variables*
+    ==============  ==============================================  ======  ===========================
+     Name            Description                                    Pbl     Unit
+    ==============  ==============================================  ======  ===========================
+    RNSO            Translocation rate of N to storage organs       N       g N m-2 ground d-1
+    RNTLV           Translocation rate of N from leaves             N       g N m-2 ground d-1
+    RNTRT           Translocation rate of N from roots              N       g N m-2 ground d-1
+    RNTST           Translocation rate of N from stems              N       g N m-2 ground d-1
+    RNULV           N uptake rate by leaves                         N       g N m-2 ground d-1
+    RNURT           N uptake rate by roots                          N       g N m-2 ground d-1
+    RNUST           N uptake rate by stems                          N       g N m-2 ground d-1
+    RNUPTOT         Total N uptake rate                             Y       g N m-2 ground d-1
+    ==============  ==============================================  ======  ===========================
+
+    *Auxiliary variables*
+    ==============  ==============================================  ======  ===========================
+     Name            Description                                    Pbl     Unit
+    ==============  ==============================================  ======  ===========================
+    ATN             Total amount of translocatable N                N       g N m-2 ground
+    ATNLV           Amount of translocatable N in leaves            N       g N m-2 ground
+    ATNRT           Amount of translocatable N in roots             N       g N m-2 ground
+    ATNST           Amount of translocatable N in stems             N       g N m-2 ground
+    NDEML           N demand of leaves                              N       g N m-2 ground
+    NDEMR           N demand of roots                               N       g N m-2 ground
+    NDEMS           N demand of stems                               N       g N m-2 ground
+    NDEMSO          Source limited N demand of storage organs       N       g N m-2 ground
+    NDEMTO          Total N demand                                  N       g N m-2 ground
+    NSUPSO          Supply limited N demand of storage organs       N       g N m-2 ground
+    ==============  ==============================================  ======  ===========================
+    """
+
     class Parameters(ParamTemplate):
         DVSNLT = Float()
         DVSNT = Float()
-        FRNX = Float()
         FNTRT = Float()
         NFRLVI = Float()
         NFRRTI = Float()
