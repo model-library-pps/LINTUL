@@ -39,7 +39,7 @@ class LightInterceptionAndGrowth(SimulationObject):
     WSTI            Inital stem dry matter weight                   SCr     g DM m-2 ground
     ==============  ==============================================  ======  ===========================
 
-     *State variables*
+    *State variables*
 
     ==============  ==============================================  ======  ==============================
      Name            Description                                    Pbl     Unit
@@ -52,7 +52,7 @@ class LightInterceptionAndGrowth(SimulationObject):
                     dry matter that died).                          N       g DM m-2 ground
     ==============  ==============================================  ======  ==============================
 
-     *Rate variables*
+    *Rate variables*
 
     ==============  ==============================================  ======  ==============================
      Name            Description                                    Pbl     Unit
@@ -65,6 +65,7 @@ class LightInterceptionAndGrowth(SimulationObject):
     ==============  ==============================================  ======  ==============================
 
      *Auxiliary variables*
+
     ==============  ==============================================  ======  ==============================
      Name            Description                                    Pbl     Unit
     ==============  ==============================================  ======  ==============================
