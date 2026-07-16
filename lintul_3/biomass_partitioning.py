@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+# Herman Berghuijs (herman.berghuijs@wur.nl)
+# July 2026
+
 import numpy as np
 from pcse.traitlets import Float
 from pcse.base import SimulationObject, ParamTemplate, StatesTemplate, RatesTemplate
@@ -27,7 +31,7 @@ class BiomassPartitioning(SimulationObject):
                     conditions.
     FRTTB           Partitioning fraction the to roots as a         TCr     g DM g-1 DM
                     function of development stage under potential
-                    growth ocnditions
+                    growth conditions
     FSOTB           Partitioning fraction to the storage organs as
                     a function of development stage under potential TCr     g DM g-1 DM
                     growth conditions.

@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+# Herman Berghuijs (herman.berghuijs@wur.nl)
+# July 2026
+
 import numpy as np
 from pcse.traitlets import Float
 from pcse.base import SimulationObject, ParamTemplate, StatesTemplate, RatesTemplate
