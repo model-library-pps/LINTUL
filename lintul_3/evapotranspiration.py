@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+# Herman Berghuijs (herman.berghuijs@wur.nl)
+# July 2026
+
 from pcse.base import ParamTemplate, RatesTemplate, SimulationObject, StatesTemplate
 from pcse.traitlets import Int, Float
 import numpy as np
@@ -6,7 +10,59 @@ cm_to_mm = 1e1
 m_to_mm = 1e3
 
 class Evapotranspiration(SimulationObject):
+    """
+    Class to simulate the actual rates of transpiration and soil evapotranspiration.
 
+    Calculates the actual rates of transpiration and soil evapotranspiration from the previously
+    calculated rates of potential transpiration and potential soil evaporation (see penman.py).
+
+    *Simulation parameters*
+
+    ==============  ==============================================  ======  ===========================
+     Name            Description                                    Type     Unit
+    ==============  ==============================================  ======  ===========================
+    TRANCO          Transpiration constant (crop characteristic
+                    determininig drought tolerance)                 SCr     mm3 water m-2 soil d-1
+    WCFC            Soil moisture content at field capacity         SCr     mm3 water m-2 soil
+    WCAD            Soil moisture content at airdry                 SCr     mm3 water m-2 soil
+    WCST            Soil moisture content at saturation             SCr     mm3 water m-2 soil
+    WCWET           Soil moisture content above which oxygen
+                    stress occurs.
+    WCWP            Soil moisture content at wilting point          SCr     mm3 water m-2 soil
+    WMFAC
+    ==============  ==============================================  ======  ===========================
+
+    *State variables*
+    ==============  ==============================================  ======  ==============================
+     Name            Description                                    Pbl     Unit
+    ==============  ==============================================  ======  ==============================
+    DSLR            Amount of days with low precipitation           N       d
+    ==============  ==============================================  ======  ==============================
+
+    *Rate variables*
+    ==============  ==============================================  ======  ==============================
+     Name            Description                                    Pbl     Unit
+    ==============  ==============================================  ======  ==============================
+    EVAP            Soil evaporation rate                           Y       mm3 water m-2 soil d-1
+    RDSLR           Rate of increase of days with low
+                    precipitation                                   N       d d-1
+    TRAN            Actual transpiration rate                       Y       mm3 water m-2 soil d-1
+    ==============  ==============================================  ======  ==============================
+
+    *Auxiliary variables*
+    ==============  ==============================================  ======  ==============================
+     Name            Description                                    Pbl     Unit
+    ==============  ==============================================  ======  ==============================
+    AVAILF          Soil evaporation reduction factor               N       mm3 water mm-3 water
+    EVS             Preliminary soil evaporation rate.              N       mm3 water mm-2 soil d-1
+    FR              Preliminary transpiration reduction factor.     N       mm3 water mm-3 water
+    TRANRF          Transpiration reduction factor.                 Y       mm3 water mm-3 water
+    WAAD            Amount of water at airdry.                      N       mm3 water mm-2 water
+    WAFC            Amount of water at field capacity.              Y       mm3 water mm-2 water
+    WCCR            Soil moisture content below which drought
+                    stress occurs.                                  N       mm3 water mm-2 water
+    ==============  ==============================================  ======  ==============================
+    """
     class Parameters(ParamTemplate):
         TRANCO = Float()
         WCFC = Float()
