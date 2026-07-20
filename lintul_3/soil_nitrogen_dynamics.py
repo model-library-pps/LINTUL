@@ -6,6 +6,26 @@ from pcse.base import ParamTemplate, RatesTemplate, SimulationObject, StatesTemp
 from pcse.traitlets import Float
 from pcse.util import AfgenTrait
 
+class SoilNitrogenDynamicsPP(SimulationObject):
+    """"
+    Class to simulate soil water dynamics under potential growth conditions
+
+    This class simulates a fake available nitrogen balance in which there is always a large amount of available
+    nitrogen available. NAVAIL remains 100 kg/ha whatever the crop takes.
+    """
+
+    class StateVariables(StatesTemplate):
+        NAVAIL = Float()  # total mineral N from soil and fertiliser  kg N ha-1
+
+    def initialize(self, day, kiosk, parvalues):
+        self.states = self.StateVariables(kiosk, publish=["NAVAIL"], NAVAIL=100.)
+
+    def calc_rates(self, day, drv):
+        pass
+
+    def integrate(self, day, delt=1.0):
+        self.touch()
+
 class SoilNitrogenDynamics(SimulationObject):
     """
     Class to simulate the dynamics of available nitrogen in the soil

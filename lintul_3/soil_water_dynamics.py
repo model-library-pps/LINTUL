@@ -9,6 +9,69 @@ from pcse.traitlets import Float, Instance
 cm_to_mm = 1e1
 m_to_mm = 1e3
 
+class SoilWaterDynamicsPP(SimulationObject):
+    """
+    Class to simulate soil water dynamics under potential growth conditions
+
+    This class simulates a fake water balance in which the soil moisture content is always at field capacity.
+    
+    ** Simulation parameters **
+
+    =================  ==============================================  ======  ===========================
+    Name               Description                                     Type    Unit
+    =================  ==============================================  ======  ===========================
+    ROOTDI             Initial rooting depth                           SCr     mm3 water mm-2 ground d-1
+    ROOTDM             Maximum rooting depth                           SCr     m soil
+    WCFC               Soil moisture content at field capacity         SCr     m3 water m-3 soil
+    =================  ==============================================  ======  ===========================
+
+    ** State variables **
+
+    =================  ==============================================  ======  ===========================
+    Name               Description                                     Pbl     Unit
+    =================  ==============================================  ======  ===========================
+    WA                 Amount of water in rooted soil                  Y       mm3 water mm-2 ground
+    WC                 Soil moisture content in rooted soil            Y       mm3 water mm-3 ground
+    =================  ==============================================  ======  ===========================
+
+    """
+
+    class Parameters(ParamTemplate):
+        WCFC = Float()
+        ROOTDI = Float()
+        ROOTDM = Float()
+
+    class StateVariables(StatesTemplate):
+        WA = Float()
+        WC = Float()
+
+    class RateVariables(RatesTemplate):
+        pass
+
+    def initialize(self, day, kiosk, parameters):
+        self.kiosk = kiosk
+        self.rates = self.RateVariables(kiosk)
+        self.params = self.Parameters(parameters)
+        p = self.params
+        WAI = p.ROOTDI * p.WCFC * m_to_mm
+        WCI = WAI / p.ROOTDI
+        self.states = self.StateVariables(kiosk,
+                                          publish = ["WA", "WC"],
+                                          WA = WAI,
+                                          WC = WCI
+                                          )
+    def calc_rates(self, day, drv):
+        pass
+
+    def integrate(self, day, drv):
+        k = self.kiosk
+        p = self.params
+        s = self.states
+        WA = k.ROOTD * p.WCFC * m_to_mm
+        WC = WA / (k.ROOTD * m_to_mm)
+        s.WA = WA
+        s.WC = WC
+
 class SoilWaterDynamics(SimulationObject):
     """
     Class to simulate the dynamics of water in the rooted soil
