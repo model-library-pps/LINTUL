@@ -52,6 +52,8 @@ class CropNitrogenDynamics(SimulationObject):
     ANRT            Amount of N in roots                            Y       g N m-2 ground
     ANSO            Amount of N in storage organs                   Y       g N m-2 ground
     ANST            Amount of N in stems                            Y       g N m-2 ground
+    NLOSS           Total amount of N lost due to senescence        N       g N m-2 ground
+    NUPTT           Total amount of N taken up                      N       g N m-2 ground
     ==============  ==============================================  ======  ===========================
 
     *Rate variables*
@@ -76,12 +78,14 @@ class CropNitrogenDynamics(SimulationObject):
     ATNLV           Amount of translocatable N in leaves            N       g N m-2 ground
     ATNRT           Amount of translocatable N in roots             N       g N m-2 ground
     ATNST           Amount of translocatable N in stems             N       g N m-2 ground
+    NBAL            N balance                                       N       g N m-2 ground
     NDEML           N demand of leaves                              N       g N m-2 ground
     NDEMR           N demand of roots                               N       g N m-2 ground
     NDEMS           N demand of stems                               N       g N m-2 ground
     NDEMSO          Source limited N demand of storage organs       N       g N m-2 ground
     NDEMTO          Total N demand                                  N       g N m-2 ground
     NSUPSO          Supply limited N demand of storage organs       N       g N m-2 ground
+    NUPTT           Total N uptake                                  N       g N m-2 ground
     ==============  ==============================================  ======  ===========================
     """
 
@@ -107,6 +111,9 @@ class CropNitrogenDynamics(SimulationObject):
         ANRT = Float()
         ANSO = Float()
         ANST = Float()
+        NBAL = Float()
+        NLOSS = Float()
+        NUPTT = Float()
 
     class RateVariables(RatesTemplate):
         ATN = Float()
@@ -145,6 +152,9 @@ class CropNitrogenDynamics(SimulationObject):
                                           ANRT = ANRTI,
                                           ANSO = ANSOI,
                                           ANST = ANSTI,
+                                          NBAL = 0.,
+                                          NLOSS = 0.,
+                                          NUPTT = 0.
                                           )
         self.rates = self.RateVariables(kiosk,
                                         publish = ["RNUPTOT"])
@@ -176,6 +186,7 @@ class CropNitrogenDynamics(SimulationObject):
 
     def integrate(self, day, drv, delt = 1):
         k = self.kiosk
+        p = self.params
         r = self.rates
         s = self.states
 
@@ -183,6 +194,16 @@ class CropNitrogenDynamics(SimulationObject):
         s.ANRT += (r.RNURT - r.RNTRT - k.RDRTN) * delt
         s.ANST += (r.RNUST - r.RNTST) * delt
         s.ANSO += r.RNSO * delt
+
+        s.NUPTT += (r.RNULV +  r.RNURT + r.RNUST) * delt
+        s.NLOSS += (k.RDLN + k.RDRTN) * delt
+
+        ANLVI = p.NFRLVI * p.WLVGI
+        ANRTI = p.NFRSTI * p.WRTLI
+        ANSTI = p.NFRSTI * p.WSTI
+        ANSOI = 0.
+
+        s.NBALAN = s.NUPTT - s.NLOSS + (ANLVI + ANRTI + ANSOI + ANSTI) - (s.ANLV + s.ANRT + s.ANSO + s.ANST)
 
     def calculate_n_demand_crop(self):
         r = self.rates
