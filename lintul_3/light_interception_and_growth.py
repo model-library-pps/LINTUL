@@ -44,8 +44,12 @@ class LightInterceptionAndGrowth(SimulationObject):
     ==============  ==============================================  ======  ==============================
      Name            Description                                    Pbl     Unit
     ==============  ==============================================  ======  ==============================
-    WLVG            Leaf dry matter weight                          Y       g DM m-2 ground
-    WRT             Root dry matter weight                          Y       g DM m-2 ground
+    CBAL            Dry weight balance                              N       g DM m-2 ground
+    WDRT            Dead root dry matter weight                     N       g DM m-2 ground
+    WLVD            Dead leaf dry matter weight                     N       g DM m-2 ground
+    WLVG            Green leaf dry matter weight                    Y       g DM m-2 ground
+    WLV             Living and dead leaf dry matter weight          Y       g DM m-2 ground
+    WRT             Living root dry matter weight                   Y       g DM m-2 ground
     WSO             Storage organ dry matter weight                 Y       g DM m-2 ground
     WST             Stem dry matter weight                          Y       g DM m-2 ground
     WTOT            Total weight of dry matter produced (including
@@ -84,6 +88,10 @@ class LightInterceptionAndGrowth(SimulationObject):
         WSTI = Float()
 
     class StateVariables(StatesTemplate):
+        CBAL = Float()
+        WDRT = Float()
+        WLV = Float()
+        WLVD = Float()
         WLVG = Float()
         WRT = Float()
         WSO = Float()
@@ -106,14 +114,17 @@ class LightInterceptionAndGrowth(SimulationObject):
                                         publish = ["RGWTOT", "RGWLVG", "RGWRT", "RGWSO", "RGWST"])
 
         p = self.params
-        WTOTI = p.WLVGI + p.WRTLI + p.WSOI + p.WSTI
         self.states = self.StateVariables(kiosk,
                                           publish = ["WLVG", "WRT", "WSO", "WST"],
+                                          CBAL = 0.,
+                                          WDRT = 0.,
+                                          WLV = p.WLVGI,
+                                          WLVD = 0.,
                                           WLVG = p.WLVGI,
                                           WRT = p.WRTLI,
                                           WSO = p.WSOI,
                                           WST = p.WSTI,
-                                          WTOT = WTOTI)
+                                          WTOT = 0.)
 
     def calc_rates(self, day, drv, delt):
         self.calculate_light_interception_rate(drv)
@@ -126,14 +137,21 @@ class LightInterceptionAndGrowth(SimulationObject):
 
     def integrate(self, day, drv, delt = 1):
         k = self.kiosk
+        p = self.params
         r = self.rates
         s = self.states
 
         s.WTOT += r.RGWTOT * delt
+        s.WLV += r.RGWLVG * delt
         s.WLVG += (r.RGWLVG - k.RDLVNS) * delt
+        s.WLVD += k.RDLVNS * delt
+        s.WDRT += k.RDRT * delt
         s.WRT += (r.RGWRT - k.RDRT) * delt
         s.WST += r.RGWST * delt
         s.WSO += r.RGWSO * delt
+
+        s.CBAL = s.WTOT + (p.WRTLI + p.WLVGI + p.WSTI + p.WSOI) - (s.WLV + s.WST + s.WSO + s.WRT + s.WDRT)
+        print(s.CBAL)
 
     def calculate_leaf_dry_matter_production(self):
         r = self.rates
