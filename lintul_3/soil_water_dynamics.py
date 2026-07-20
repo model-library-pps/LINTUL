@@ -42,7 +42,7 @@ class SoilWaterDynamics(SimulationObject):
     TRUNOFF         Total amount of water removed by surface runoff N       mm3 water mm-2 soil
     TTRAN           Total amount of water transpired                N       mm3 water mm-2 soil
     WA              Amount of water in rooted soil                  Y       mm3 water mm-2 soil
-    WATBAL          Sum of all sources and sinks of water           N       mm3 water mm-2 soil
+    WATBAL          Water balance                                   N       mm3 water mm-2 soil
     WC              Soil moisture content of rooted soil            Y       mm3 water mm-3 soil
     ==============  ==============================================  ======  ==============================
 
