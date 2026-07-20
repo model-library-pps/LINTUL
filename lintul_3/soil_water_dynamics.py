@@ -24,11 +24,52 @@ class SoilWaterDynamics(SimulationObject):
      Name            Description                                    Type     Unit
     ==============  ==============================================  ======  ===========================
     ROOTDI          Initial rooted depth                            SCr     m soil
-    WCI             Initial soil moisture content of rooted soil    SCr     m3 water m-3 soil
-    WCSUBS          Soil moisture content of subsoil                SCr     m3 water m-2 soil
+    WCI             Initial soil moisture content of rooted soil    SCr     mm3 water mm-3 soil
+    WCSUBS          Soil moisture content of subsoil                SCr     mm3 water mm-3 soil
     ==============  ==============================================  ======  ===========================
 
+    *State variables*
 
+    ==============  ==============================================  ======  ==============================
+     Name            Description                                    Pbl     Unit
+    ==============  ==============================================  ======  ==============================
+    TDRAIN          Total amount of water removed by drainage       N       mm3 water mm-2 soil
+    TEVAP           Total amount of water removed by soil
+                    evaporation                                     N       mm3 water mm-2 soil
+    TEXPLOR         Total amount of water added by root exploration N       mm3 water mm-2 soil
+    TIRRIG          Total amount of water added by irrigation       N       mm3 water mm-2 soil
+    TRAIN           Total amount of rain added by precipitation     N       mm3 water mm-2 soil
+    TRUNOFF         Total amount of water removed by surface runoff N       mm3 water mm-2 soil
+    TTRAN           Total amount of water transpired                N       mm3 water mm-2 soil
+    WA              Amount of water in rooted soil                  Y       mm3 water mm-2 soil
+    WATBAL          Sum of all sources and sinks of water           N       mm3 water mm-2 soil
+    WC              Soil moisture content of rooted soil            Y       mm3 water mm-3 soil
+    ==============  ==============================================  ======  ==============================
+
+    *Rate variables*
+
+    ==============  ==============================================  ======  ==============================
+     Name            Description                                    Pbl     Unit
+    ==============  ==============================================  ======  ==============================
+    REVAP           Rate of soil evaporation                        N       mm3 water mm-2 soil d-1
+    REXPLOR         Rate of root exploration                        N       mm3 water mm-2 soil d-1
+    RTRAN           Rate of actual transpiration                    N       mm3 water mm-2 soil d-1
+    RTDRAIN         Rate of change total amount of water lost by
+                    drainage                                        N       mm3 water mm-2 soil d-1
+    RTEVAP          Rate of change total amount of water lost by
+                    soil evaporation                                N       mm3 water mm-2 soil d-1
+    RTEXPLOR        Rate of change total amount of water added by
+                    root exploration                                N       mm3 water mm-2 soil d-1
+    RTIRRIG         Rate of change total amount of water added by
+                    root irrigation                                 N       mm3 water mm-2 soil d-1
+    RTRAIN          Rate of change total amount of water added by
+                    precipitation                                   N       mm3 water mm-2 soil d-1
+    RTTRAN          Rate of change total amount of water lost by
+                    transpiration                                   N       mm3 water mm-2 soil d-1
+    RTRUNOF         Rate of change total amount of water lost by
+                    surface run-off                                 N       mm3 water mm-2 soil d-1
+    RWA             Rate of change water in rooted soil             N       mm3 water mm-2 soil d-1
+    ==============  ==============================================  ======  ==============================
     """
 
     drunir = Instance(SimulationObject)
@@ -57,7 +98,6 @@ class SoilWaterDynamics(SimulationObject):
         REXPLOR = Float()
         RRAIN = Float()
         RTRAN = Float()
-        RWA = Float()
 
         RTDRAIN = Float()
         RTEVAP = Float()
