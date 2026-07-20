@@ -151,7 +151,6 @@ class LightInterceptionAndGrowth(SimulationObject):
         s.WSO += r.RGWSO * delt
 
         s.CBAL = s.WTOT + (p.WRTLI + p.WLVGI + p.WSTI + p.WSOI) - (s.WLV + s.WST + s.WSO + s.WRT + s.WDRT)
-        print(s.CBAL)
 
     def calculate_leaf_dry_matter_production(self):
         r = self.rates
