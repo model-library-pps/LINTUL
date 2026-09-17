@@ -1,5 +1,5 @@
-# LINTUL Cassava NPK
-This repository contains a Python implementation of the LINTUL Cassava NPK model. 
+# LINTUL
+This repository contains a Python implementation of the LINTUL model. 
 
 ## Description
 "LINTUL" (Light INTerception and UtiLisation) can be considered as a family of models consists of summary crop growth models models. Their common characteristic is that their calculation of the dry matter production rate are based on the LUE (Light Use Efficiency) concept. The LINTUL models leave detailed descriptions of certain processes in crop production and capture these processes by simpler description. They try to find a balance between simplicity and robustness. The LINTUL approach has been extensively used in teaching to allow students to understand key processes in how crop grow and how this growth is affected by their environment. It is also frequently used in research, because it requires less parameters than most other crop growth models and their values can be relatively easily determined from field observations. A full overview of the concepts of the LINTUL family of models and their applications in research and education is given by Schut et al. (2026).
@@ -18,15 +18,15 @@ Many models have been published under the name LINTUL. The source code of many o
 Although the success of the LINTUL approach, downside of having a family of LINTUL models is the lack of standardization and consistency between different LINTUL production levels and lack of version control (Schut et al. 2010). Moreover, many of the LINTUL versions are programmed in a language that many agronomists and other users are nowadays not familiar with (FORTRAN) or a language that is internally developed by Wageningen University and Research and is largely unknown outside Wageningen University and Research (FST; see Van Kraalingen et al., 2003). Finally, the models differ considerably in how well they are documented and tested and which production levels they can simulate. The Plant Production System Group therefore strives to maintain only one version of LINTUL actively, which can be found in this repository. LINTUL-3 was chosen for this purpose because it is quite well documented and tested (Shibu et al., 2010) and can simulate most of the production levels (potential, water-limited, water-and-nitrogen limited). One disadvantage of LINTUL-3 is that it is programmed in FST. The original FST source code can be found [here](https://github.com/model-library-pps/LINTUL-3_archive). In order to make this model available for a wider audience, LINTUL-3 has beeen translated from FST to Python and the name of this new implementation is now "LINTUL". LINTUL uses the PCSE (https://github.com/ajwdewit/pcse) framework to run. The repository contains instructions on how to install this package and other dependencies.  
 
 ## Example
-Examples on how to run a LINTUL Cassava NPK simulation are provided in a form of a [Jupyter Notebook](example/example.ipynb) and a [Python script](example/example.py). Both examples run a single treatment (NfPfKf) of a cassava nutrient omission trial. In this trial, cassava was sown in 2016. This trial was part of a larger set of cassava nutrient trials in Nigeria (Adiele et al., 2020). Although only one treatment in one single experiment is simulated, the  input files to run all combinations of sowing year, treatment, and location that were used in this set of nutrient omission trials are provided.
+Examples on how to run a LINTUL simulation are provided in a form of a [Jupyter Notebook](example/example.ipynb) and a [Python script](example/example.py). In both examples, a simulation is run for spring wheat grown in Wageningen (the Netherlands) in 1987.
 
 ## Software requirements
-LINTUL Cassava NPK requires a Python interpreter to run. A Python Installation Manager can be dowloaded [here](https://www.python.org/downloads/). Click on the "Download Installation Manager" button to download the Python installation manager. Next, open the Python installation manager and follow the instructions to install or update Python. Follow the instructions to install Python.
+LINTUL requires a Python interpreter to run. A Python Installation Manager can be dowloaded [here](https://www.python.org/downloads/). Click on the "Download Installation Manager" button to download the Python installation manager. Next, open the Python installation manager and follow the instructions to install or update Python. Follow the instructions to install Python.
 
-Python can be run within PyCharm, an Integrated Development Environment (IDE) for Python. The newest version of PyCharm can be downloaded [here](https://www.jetbrains.com/pycharm/download/?section=windows). Click on the Download button to install an executable to install PyCharm. Note that you will get a free trial period that gives you access to the "Pro features" on top of the free features of PyCharm. After the trial period has finished, PyCharm will offer a paid subscription such that you can keep access to these Pro features. It is not necessary to accept this offer, as both using and further developing LINTUL Cassava can be done with the free features and does not require any of the Pro features.   
+Python can be run within PyCharm, an Integrated Development Environment (IDE) for Python. The newest version of PyCharm can be downloaded [here](https://www.jetbrains.com/pycharm/download/?section=windows). Click on the Download button to install an executable to install PyCharm. Note that you will get a free trial period that gives you access to the "Pro features" on top of the free features of PyCharm. After the trial period has finished, PyCharm will offer a paid subscription such that you can keep access to these Pro features. It is not necessary to accept this offer, as both using and further developing LINTUL can be done with the free features and does not require any of the Pro features.   
 
 ## User manual
-This user manual assumes that LINTULis run within PyCharm. In order to run LINTUL Cassava NPK, follow these steps:
+This user manual assumes that LINTULis run within PyCharm. In order to run LINTUL, follow these steps:
 - Downlad the LINTUL repository in a directory of your choice.
 - Open PyCharm
 - Click on the hamburger button (three lined equal sign in the left top corner)
@@ -34,7 +34,7 @@ This user manual assumes that LINTULis run within PyCharm. In order to run LINTU
 - Browse to the  directory where the contents LINTUL repository was stored.
 - Click on "Select folder"
 
-This will open all code in the repository. In order to run LINTUL Cassava NPK for the first time, a virtual environment needs to be installed. For this purpose, follow these steps:
+This will open all code in the repository. In order to run LINTUL for the first time, a virtual environment needs to be installed. For this purpose, follow these steps:
 - Click on the hamburger button.
 - Click on Settings
 - Click on Python -> Interpreter
