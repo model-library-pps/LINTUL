@@ -1,5 +1,8 @@
+# Fraction of amount of water required to bring the soil moisture content to field capacity that is applied by
+# irrigation
 IRRIGF: 0.0
 
+# N fertilization amount as a function of day of the year (d, g N m-2 ground d-1)
 FERTAB:
  [0.0, 0.0,
   99., 0.0,
@@ -10,6 +13,7 @@ FERTAB:
   126., 0.0,
   200.0, 0.0]
 
+# N recovery fraction as a function of day of the year (d, g N g-1 N)
 NRFTAB:
  [0.0, 0.70,
   100., 0.70,

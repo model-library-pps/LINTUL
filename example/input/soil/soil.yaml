@@ -1,7 +1,7 @@
-WCWP: 0.20
-WCFC: 0.40
-WCAD: 0.10
-WCST: 0.50
-WCWET: 0.45
-TRANCO: 8.
-DRATE: 30.
+WCWP: 0.20    # Soil moisture content at wilting point (mm3 water mm-3 soil)
+WCFC: 0.40    # Soil moisture content at field capacity (mm3 water mm-3 soil)
+WCAD: 0.10    # Soil moisture content at airdry (mm3 water mm-3 soil)
+WCST: 0.50    # Soil moisture content at saturation (mm3 water mm-3 soil)
+WCWET: 0.45   # Soil moisture content above which oxygen stress can occur (mm3 water mm-3 soil)
+TRANCO: 8.    # Transpiration constant (mm3 water mm-2 soil d-1)
+DRATE: 30.    # Drainage rate (cm d-1)
