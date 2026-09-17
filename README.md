@@ -1,93 +1,74 @@
-# lintul3_translation
-
-
-
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://git.wur.nl/lintul3/lintul3_translation.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://git.wur.nl/lintul3/lintul3_translation/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
+# LINTUL Cassava NPK
+This repository contains a Python implementation of the LINTUL Cassava NPK model. 
 
 ## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+"LINTUL" (Light INTerception and UtiLisation) can be considered as a family of models consists of summary crop growth models models. Summary models leave detailed descriptions of certain processes and capture these processes by simpler description. They try to find a balance between simplicity and robustness. The LINTUL approach has been extensively used in teaching to allow students to understand key processes in how crop grow and how this growth is affected by their environment. It is also frequently used in research, because it requires less parameters than most other crop growth models and their values can be relatively easily determined from field observations. A full overview of the concepts of the LINTUL family of models and their applications in research and education is given by Schut et al. (2026).
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+Many models have been published under the name LINTUL. The source code of many of these models are developed within Wageningen University and their source code is available in the Model Library PPS as an archive model:
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+- [LINTUL-1](https://github.com/model-library-pps/LINTUL-1_archive) (Spitters, 1986; Van Ooijen and Leffelaar, 2010)
+- [LINTUL-1-and-2 in R](https://github.com/model-library-pps/LINTUL-1-and-2-in-R_archive) (Spitters and Schapendonk, 1990; Van Ooijen and Leffelaar, 2014)
+- [LINTUL-2](https://github.com/model-library-pps/LINTUL-2_archive) (Spitters and Schapendonk, 1990; Van Ooijen and Leffelaar, 2014)
+- [LINTUL-3](https://github.com/model-library-pps/LINTUL-3_archive) (Shibu et al., 2011)
+- [LINTUL-4](https://github.com/model-library-pps/LINTUL-4_archive) (Wolf et al., 2012a)
+- [LINTUL-4 VSHT](https://github.com/model-library-pps/LINTUL4-VSHT_archive) (Wolf et al., 2012a)
+- [LINTUL-5](https://github.com/model-library-pps/LINTUL-5_archive) (Wolf et al., 2012b)
+- [LINTUL-6](https://github.com/model-library-pps/LINTUL-6_archive) (Wolf et al., 2012c)
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+LINTUL was originally published under the name LINTUL-3 (Shibu et al., 2011). In this study, it was applied to simulate rice growth in the Philipines and India. The model was programmed in the FST (Fortran Simulation Translator) programming language. The original FST source code can be found [here](https://github.com/model-library-pps/LINTUL-3_archive). The FST language is a simulation language that has been developed within Wageningen University and people outside this university generally do not know the language. Therefore, LINTUL-3 was translated from FST to Python by Herman Berghuijs. [This implementation](lintul_3) can be found in the current repository.  
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+## Example
+Examples on how to run a LINTUL Cassava NPK simulation are provided in a form of a [Jupyter Notebook](example/example.ipynb) and a [Python script](example/example.py). Both examples run a single treatment (NfPfKf) of a cassava nutrient omission trial. In this trial, cassava was sown in 2016. This trial was part of a larger set of cassava nutrient trials in Nigeria (Adiele et al., 2020). Although only one treatment in one single experiment is simulated, the  input files to run all combinations of sowing year, treatment, and location that were used in this set of nutrient omission trials are provided.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+## Software requirements
+LINTUL Cassava NPK requires a Python interpreter to run. A Python Installation Manager can be dowloaded [here](https://www.python.org/downloads/). Click on the "Download Installation Manager" button to download the Python installation manager. Next, open the Python installation manager and follow the instructions to install or update Python. Follow the instructions to install Python.
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+Python can be run within PyCharm, an Integrated Development Environment (IDE) for Python. The newest version of PyCharm can be downloaded [here](https://www.jetbrains.com/pycharm/download/?section=windows). Click on the Download button to install an executable to install PyCharm. Note that you will get a free trial period that gives you access to the "Pro features" on top of the free features of PyCharm. After the trial period has finished, PyCharm will offer a paid subscription such that you can keep access to these Pro features. It is not necessary to accept this offer, as both using and further developing LINTUL Cassava can be done with the free features and does not require any of the Pro features.   
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+## User manual
+This user manual assumes that LINTULis run within PyCharm. In order to run LINTUL Cassava NPK, follow these steps:
+- Downlad the LINTUL repository in a directory of your choice.
+- Open PyCharm
+- Click on the hamburger button (three lined equal sign in the left top corner)
+- Click on File -> Open
+- Browse to the  directory where the contents LINTUL Cassava NPK repository was stored.
+- Click on "Select folder"
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+This will open all code in the repository. In order to run LINTUL Cassava NPK for the first time, a virtual environment needs to be installed. For this purpose, follow these steps:
+- Click on the hamburger button.
+- Click on Settings
+- Click on Python -> Interpreter
+- Click on Add Interpreter -> Add Local Interpreter...
+- Either click on OK. Or, if you want to choose an alternative interpreter, pick another one and click "OK".
+- Open a terminal by either clicking on the Terminal button in the bottom left corner of your screen or press Alt + F12
+- Type "pip install -r requirements.txt" (without the quotes) and press Enter. 
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+The last step will install all packages that are required to run LINTUL. The names of these packages are listed in .../requirements.txt.
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+In order to run the example Python script, double click on .../example/example.py in the file structure tree and click the run button (green triangle in the top bar)
 
-## License
-For open source projects, say how it is licensed.
+In order to run the notebook, double click .../example/example.ipynb in the file structure tree. Double click on the double green triangle in the bar above the notebook content.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+## References
+Schut A. C. T., Berghuijs H. N. C., De Wit A. J. W., Van Ittersum M. K. Chapter 13: The Light INTerception and UtiLisation family of crop models. In Current crop models: State-of-the-art and future developments. https://doi.org/10.19103/AS.2025.0155.16   
+
+Shibu M. E. , Leffelaar P. A., Van Keulen H., Aggarwal P.K. LINTUL3, a simulation model for nitrogen-limited situations: Application to rice. https://doi.org/10.1016/j.eja.2010.01.003
+
+Spitters, C. J. T. (1987). An analysis of variation in yield among potato cultivars in terms of light absorption, light utilization and dry matter partitioning. Acta Horticulurae 214: 71–84. https://doi.org/10.17660/ActaHortic.1988.214.5 
+
+Spitters, C. J. T., Schapendonck A. H. C. M. (1990) Evaluation of breeding strategies for drought tolerance in potato by means of crop growth simulation. Plant and Soil 123: 193-203. https://doi.org/10.1007/BF00011268 
+
+Van Oijen M, Leffelaar P. (2010) Chapter 10(A): Lintul-1: potential crop growth. Part of the course HPC-21306 Crop Ecology 2010. https://github.com/model-library-pps/LINTUL-1_archive/blob/main/download%20documents/Lintul-1%20docs/2MATHS-Lintul_1.DOC
+
+Van Oijen M., Leffelaar P. (2014) Quantitative Aspects of Crop Production. Part of the course HPC-23303 Quantitative Aspects of Crop Production. https://github.com/model-library-pps/LINTUL-2_archive/blob/main/Lintul%202%20Text-Q%26A/Ch6B_Lintul-2_text_exerc_handouts_QA_2014_1.pdf
+
+Wolf J. (2012a) User guide for LINTUL4 and LINTUL4V: simple generic model for simulation. Group Plant Production Systems.  https://github.com/model-library-pps/LINTUL-4_archive/blob/main/download%20documents/LINTUL4-report-vs1.doc
+
+Wolf J. (2012b) LINTUL5: Simple generic model for simulation of crop growth under potential, water limited and nitrogen, phosphorus and potessium limited conditions. Group Plant Production Systems. https://github.com/model-library-pps/LINTUL-5_archive/blob/main/download%20documents/LINTUL5-report-vs1.doc
+
+Wolf J. (2012c) LINTUL6: Simple generic model for simulaiton of crop growth under potential, water limited and nitrogen limited conditions within crop rotations. Group Plant Production Systems. Wageningen UR. https://github.com/model-library-pps/LINTUL-6_archive/blob/main/download%20documents/user%20guide/LINTUL6-report-vs1.doc
+
+## Contact persons
+Herman Berghuijs (herman.berghuijs@wur.nl)
+
+Tom Schut (tom.schut@wur.nl)
