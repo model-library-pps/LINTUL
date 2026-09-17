@@ -34,14 +34,14 @@ class BaseSoilWrapper(SimulationObject):
         if self.nutrientbalance_class is not None:
             self.nutrientbalance.integrate(day, delt)
 
-class Lintul_original_PP(BaseSoilWrapper):
+class Lintul_original_PP_SoilWrapper(BaseSoilWrapper):
     waterbalance_class = SoilWaterDynamicsPP
     nutrientbalance_class = SoilNitrogenDynamicsPP
 
-class Lintul_original_WLP(BaseSoilWrapper):
+class Lintul_original_WLP_SoilWrapper(BaseSoilWrapper):
     waterbalance_class = SoilWaterDynamics
     nutrientbalance_class = SoilNitrogenDynamicsPP
 
-class Lintul_original_WNLP(BaseSoilWrapper):
+class Lintul_original_WNLP_SoilWrapper(BaseSoilWrapper):
     waterbalance_class = SoilWaterDynamics
     nutrientbalance_class = SoilNitrogenDynamics

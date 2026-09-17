@@ -2,7 +2,7 @@
 This repository contains a Python implementation of the LINTUL Cassava NPK model. 
 
 ## Description
-"LINTUL" (Light INTerception and UtiLisation) can be considered as a family of models consists of summary crop growth models models. Summary models leave detailed descriptions of certain processes and capture these processes by simpler description. They try to find a balance between simplicity and robustness. The LINTUL approach has been extensively used in teaching to allow students to understand key processes in how crop grow and how this growth is affected by their environment. It is also frequently used in research, because it requires less parameters than most other crop growth models and their values can be relatively easily determined from field observations. A full overview of the concepts of the LINTUL family of models and their applications in research and education is given by Schut et al. (2026).
+"LINTUL" (Light INTerception and UtiLisation) can be considered as a family of models consists of summary crop growth models models. Their common characteristic is that their calculation of the dry matter production rate are based on the LUE (Light Use Efficiency) concept. The LINTUL models leave detailed descriptions of certain processes in crop production and capture these processes by simpler description. They try to find a balance between simplicity and robustness. The LINTUL approach has been extensively used in teaching to allow students to understand key processes in how crop grow and how this growth is affected by their environment. It is also frequently used in research, because it requires less parameters than most other crop growth models and their values can be relatively easily determined from field observations. A full overview of the concepts of the LINTUL family of models and their applications in research and education is given by Schut et al. (2026).
 
 Many models have been published under the name LINTUL. The source code of many of these models are developed within Wageningen University and their source code is available in the Model Library PPS as an archive model:
 
@@ -15,7 +15,7 @@ Many models have been published under the name LINTUL. The source code of many o
 - [LINTUL-5](https://github.com/model-library-pps/LINTUL-5_archive) (Wolf et al., 2012b)
 - [LINTUL-6](https://github.com/model-library-pps/LINTUL-6_archive) (Wolf et al., 2012c)
 
-LINTUL was originally published under the name LINTUL-3 (Shibu et al., 2011). In this study, it was applied to simulate rice growth in the Philipines and India. The model was programmed in the FST (Fortran Simulation Translator) programming language. The original FST source code can be found [here](https://github.com/model-library-pps/LINTUL-3_archive). The FST language is a simulation language that has been developed within Wageningen University and people outside this university generally do not know the language. Therefore, LINTUL-3 was translated from FST to Python by Herman Berghuijs. [This implementation](lintul) can be found in the current repository.  
+Although the success of the LINTUL approach, downside of having a family of LINTUL models is the lack of standardization and consistency between different LINTUL production levels and lack of version control (Schut et al. 2010). Moreover, many of the LINTUL versions are programmed in a language that many agronomists and other users are nowadays not familiar with (FORTRAN) or a language that is internally developed by Wageningen University and Research and is largely unknown outside Wageningen University and Research (FST; see Van Kraalingen et al., 2003). Finally, the models differ considerably in how well they are documented and tested and which production levels they can simulate. The Plant Production System Group therefore strives to maintain only one version of LINTUL actively, which can be found in this repository. LINTUL-3 was chosen for this purpose because it is quite well documented and tested (Shibu et al., 2010) and can simulate most of the production levels (potential, water-limited, water-and-nitrogen limited). One disadvantage of LINTUL-3 is that it is programmed in FST. The original FST source code can be found [here](https://github.com/model-library-pps/LINTUL-3_archive). In order to make this model available for a wider audience, LINTUL-3 has beeen translated from FST to Python by Herman Berghuijs. The model uses the PCSE (https://github.com/ajwdewit/pcse) framework to run. The repository contains instructions on how to install this package and other dependencies.  
 
 ## Example
 Examples on how to run a LINTUL Cassava NPK simulation are provided in a form of a [Jupyter Notebook](example/example.ipynb) and a [Python script](example/example.py). Both examples run a single treatment (NfPfKf) of a cassava nutrient omission trial. In this trial, cassava was sown in 2016. This trial was part of a larger set of cassava nutrient trials in Nigeria (Adiele et al., 2020). Although only one treatment in one single experiment is simulated, the  input files to run all combinations of sowing year, treatment, and location that were used in this set of nutrient omission trials are provided.
@@ -31,7 +31,7 @@ This user manual assumes that LINTULis run within PyCharm. In order to run LINTU
 - Open PyCharm
 - Click on the hamburger button (three lined equal sign in the left top corner)
 - Click on File -> Open
-- Browse to the  directory where the contents LINTUL Cassava NPK repository was stored.
+- Browse to the  directory where the contents LINTUL repository was stored.
 - Click on "Select folder"
 
 This will open all code in the repository. In order to run LINTUL Cassava NPK for the first time, a virtual environment needs to be installed. For this purpose, follow these steps:
@@ -52,11 +52,13 @@ In order to run the notebook, double click .../example/example.ipynb in the file
 ## References
 Schut A. C. T., Berghuijs H. N. C., De Wit A. J. W., Van Ittersum M. K. Chapter 13: The Light INTerception and UtiLisation family of crop models. In Current crop models: State-of-the-art and future developments. https://doi.org/10.19103/AS.2025.0155.16   
 
-Shibu M. E. , Leffelaar P. A., Van Keulen H., Aggarwal P.K. LINTUL3, a simulation model for nitrogen-limited situations: Application to rice. https://doi.org/10.1016/j.eja.2010.01.003
+Shibu M. E. , Leffelaar P. A., Van Keulen H., Aggarwal P. K. (2010) LINTUL3, a simulation model for nitrogen-limited situations: Application to rice. European Journal of Agronomy 32: 255-271. https://doi.org/10.1016/j.eja.2010.01.003
 
 Spitters, C. J. T. (1987). An analysis of variation in yield among potato cultivars in terms of light absorption, light utilization and dry matter partitioning. Acta Horticulurae 214: 71–84. https://doi.org/10.17660/ActaHortic.1988.214.5 
 
 Spitters, C. J. T., Schapendonck A. H. C. M. (1990) Evaluation of breeding strategies for drought tolerance in potato by means of crop growth simulation. Plant and Soil 123: 193-203. https://doi.org/10.1007/BF00011268 
+
+Van Kraalingen, D. W. G., Rappoldt, C.,  Van Laar, H. H. (2003). The Fortran simulation translator, a simulation language. European Journal of Agronomy: 18, 359-361. https://doi.org/10.1016/S1161-0301(02)00131-4
 
 Van Oijen M, Leffelaar P. (2010) Chapter 10(A): Lintul-1: potential crop growth. Part of the course HPC-21306 Crop Ecology 2010. https://github.com/model-library-pps/LINTUL-1_archive/blob/main/download%20documents/Lintul-1%20docs/2MATHS-Lintul_1.DOC
 
@@ -70,5 +72,3 @@ Wolf J. (2012c) LINTUL6: Simple generic model for simulaiton of crop growth unde
 
 ## Contact persons
 Herman Berghuijs (herman.berghuijs@wur.nl)
-
-Tom Schut (tom.schut@wur.nl)
