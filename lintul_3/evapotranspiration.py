@@ -22,10 +22,10 @@ class Evapotranspiration(SimulationObject):
      Name            Description                                    Type     Unit
     ==============  ==============================================  ======  ===========================
     TRANCO          Transpiration constant (crop characteristic
-                    determininig drought tolerance)                 SCr     mm3 water m-2 soil d-1
-    WCFC            Soil moisture content at field capacity         SCr     mm3 water m-2 soil
-    WCAD            Soil moisture content at airdry                 SCr     mm3 water m-2 soil
-    WCST            Soil moisture content at saturation             SCr     mm3 water m-2 soil
+                    determininig drought tolerance)                 SCr     mm3 water mm-2 soil d-1
+    WCFC            Soil moisture content at field capacity         SCr     mm3 water mm-2 soil
+    WCAD            Soil moisture content at airdry                 SCr     mm3 water mm-2 soil
+    WCST            Soil moisture content at saturation             SCr     mm3 water mm-2 soil
     WCWET           Soil moisture content above which oxygen
                     stress occurs.
     WCWP            Soil moisture content at wilting point          SCr     mm3 water m-2 soil
@@ -43,10 +43,10 @@ class Evapotranspiration(SimulationObject):
     ==============  ==============================================  ======  ==============================
      Name            Description                                    Pbl     Unit
     ==============  ==============================================  ======  ==============================
-    EVAP            Soil evaporation rate                           Y       mm3 water m-2 soil d-1
+    EVAP            Soil evaporation rate                           Y       mm3 water mm-2 soil d-1
     RDSLR           Rate of increase of days with low
                     precipitation                                   N       d d-1
-    TRAN            Actual transpiration rate                       Y       mm3 water m-2 soil d-1
+    TRAN            Actual transpiration rate                       Y       mm3 water mm-2 soil d-1
     ==============  ==============================================  ======  ==============================
 
     *Auxiliary variables*
