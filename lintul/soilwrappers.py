@@ -1,7 +1,7 @@
 from pcse.base import SimulationObject
 from pcse.traitlets import Instance
-from lintul_3.soil_water_dynamics import SoilWaterDynamics, SoilWaterDynamicsPP
-from lintul_3.soil_nitrogen_dynamics import SoilNitrogenDynamics, SoilNitrogenDynamicsPP
+from lintul.soil_water_dynamics import SoilWaterDynamics, SoilWaterDynamicsPP
+from lintul.soil_nitrogen_dynamics import SoilNitrogenDynamics, SoilNitrogenDynamicsPP
 
 class BaseSoilWrapper(SimulationObject):
     """Base class for wrapping soil water and nutrient/carbon balances.
@@ -34,14 +34,14 @@ class BaseSoilWrapper(SimulationObject):
         if self.nutrientbalance_class is not None:
             self.nutrientbalance.integrate(day, delt)
 
-class Lintul_3_original_PP(BaseSoilWrapper):
+class Lintul_original_PP(BaseSoilWrapper):
     waterbalance_class = SoilWaterDynamicsPP
     nutrientbalance_class = SoilNitrogenDynamicsPP
 
-class Lintul_3_original_WLP(BaseSoilWrapper):
+class Lintul_original_WLP(BaseSoilWrapper):
     waterbalance_class = SoilWaterDynamics
     nutrientbalance_class = SoilNitrogenDynamicsPP
 
-class Lintul_3_original_WNLP(BaseSoilWrapper):
+class Lintul_original_WNLP(BaseSoilWrapper):
     waterbalance_class = SoilWaterDynamics
     nutrientbalance_class = SoilNitrogenDynamics

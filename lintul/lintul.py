@@ -5,20 +5,20 @@
 from pcse.traitlets import Instance
 from pcse.base import SimulationObject, ParamTemplate, StatesTemplate, RatesTemplate
 
-from lintul_3.astro import Astro
-from lintul_3.biomass_partitioning import BiomassPartitioning
-from lintul_3.crop_nitrogen_dynamics import CropNitrogenDynamics
-from lintul_3.evapotranspiration import Evapotranspiration
-from lintul_3.fibrous_root_growth import FibrousRootGrowth
-from lintul_3.growth_leaf_area import GrowthLeafArea
-from lintul_3.leaf_senescence import LeafSenescence
-from lintul_3.light_interception_and_growth import LightInterceptionAndGrowth
-from lintul_3.penman import Penman
-from lintul_3.phenology import Phenology
-from lintul_3.root_senescence import RootSenescence
-from lintul_3.nitrogen_stress import NitrogenStress
+from lintul.astro import Astro
+from lintul.biomass_partitioning import BiomassPartitioning
+from lintul.crop_nitrogen_dynamics import CropNitrogenDynamics
+from lintul.evapotranspiration import Evapotranspiration
+from lintul.fibrous_root_growth import FibrousRootGrowth
+from lintul.growth_leaf_area import GrowthLeafArea
+from lintul.leaf_senescence import LeafSenescence
+from lintul.light_interception_and_growth import LightInterceptionAndGrowth
+from lintul.penman import Penman
+from lintul.phenology import Phenology
+from lintul.root_senescence import RootSenescence
+from lintul.nitrogen_stress import NitrogenStress
 
-class LINTUL_3(SimulationObject):
+class LINTUL(SimulationObject):
     """
     Top level object organizing the different components of LINTUL-3
 

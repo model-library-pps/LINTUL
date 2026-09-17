@@ -2,7 +2,7 @@
 # Herman Berghuijs (herman.berghuijs@wur.nl)
 # July 2026
 
-from lintul_3.drunir import Drunir
+from lintul.drunir import Drunir
 from pcse.base import ParamTemplate, RatesTemplate, SimulationObject, StatesTemplate
 from pcse.traitlets import Float, Instance
 
