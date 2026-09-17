@@ -1,72 +1,82 @@
 # Initial constants
 # -----------------
 ZERO   : 0.
-TSUMI  : 0.
-WLVGI  : 2.4
-WSTI   : 0.0
-WRTLI  : 3.6
-WSOI   : 0.0
-ROOTDI : 0.10
+TSUMI  : 0.          # Initial value temperature sum (oC d)
+WLVGI  : 2.4         # Initial leaf dry weight (g DM m-2 ground)
+WSTI   : 0.0         # Initial stem dry weight (g DM m-2 ground)
+WRTLI  : 3.6         # Initial root dry weight (g DM m-2 ground)
+WSOI   : 0.0         # Initial storage organ dry weight (g DM m-2 ground)
+ROOTDI : 0.10        # Initial rooting depth (m)
  
-# Model parameters
+# Scalar model parameters
 # ----------------
-TSUMAG: 800.
-TSUMMT: 1030.
-TSUMAN: 800.
-WCI: 0.40
-NFRLVI: 0.06
-NFRRTI: 0.03
-NFRSTI: 0.03
-NMAXSO: 0.0165
-LRNR: 0.50
-LSNR: 0.50
-FRNX: 0.5
-DVSNT: 0.8
-DVSNLT: 1.0
-DVSDR: 1.0
-WMFAC: 0
-WCSUBS: 0.30
-SLAC: 0.022
-TBASE: 0.
-DOYEM: 90
-LAICR: 4.0
-RDRSHM: 0.03
-RGRL: 0.009
-LUE: 2.8
-K: 0.6
-ROOTDM: 1.2
-RRDMAX: 0.012
-TCNT: 10.
-RNFRT: 0.002
-RNFST: 0.002
-RNFLV: 0.004
-FNTRT: 0.15
-NLUE: 0.20
-NLAI: 1.0
-NSLA: 1.0
-NPART: 1.0
+TSUMAG: 800.         # Temperature sum above which leaf senescence occurs (oC d).
+TSUMMT: 1030.        # Temperature sum between anthesis and physiological maturity (oC d)
+TSUMAN: 800.         # Temperature sum between emergence and anthesis (oC d)
+WCI: 0.40            # Initial soil water content in rooted soil (m3 water m-2 soil)
+NFRLVI: 0.06         # Initial leaf nitrogen concentration (g N g-1 DM)
+NFRRTI: 0.03         # Initial root nitrogen concentration (g N g-1 DM)
+NFRSTI: 0.03         # Initial stem nitrogen concentration (g N g-1 DM)
+NMAXSO: 0.0165       # Maximum storage organ nitrogen concentration (g N g-1 DM)
+LRNR: 0.50           # Fraction of maximum N concentration in roots and maximum N concentration in leaves (g N g-1 N)
+LSNR: 0.50           # Fraction of maximum N concentration in stems and maximum N concentration in leaves (g N g-1 N)
+FRNX: 0.5            # Fraction of optimum N concentration and maximum N concentration in leaves and stems (g N g-1 N)
+DVSNT: 0.8           # Development stage below which there is no N translocation from vegetative organs to storage
+                     # organs (-)
+DVSNLT: 1.0          # Development stage above which there is no more N uptake from the soil (-)
+DVSDR: 1.0           # Development stage above which root senescence starts (-)
+WMFAC: 0             # Switch to determine whether (=1) or not (=0) the simulated system is flooded rice.
+WCSUBS: 0.30         # Soil moisture content in unrooted soil (m3 water m-3 soil)
+SLAC: 0.022          # Referemce specific leaf area (m2 leaf DM g-1 leaf)
+TBASE: 0.            # Base temperature; temperature below which there is no development (oC)
+DOYEM: 90            # Day of the year of emergence (d)
+LAICR: 4.0           # Leaf area index above which senescence due to self-shading can occur (m2 leaf m-2 ground)
+RDRSHM: 0.03         # Maximum relative death rate of leaves due to self-shading (d-1)
+RGRL: 0.009          # Relative growth rate of leaves in juvenile phase (d-1)
+LUE: 2.8             # Light use efficiency (g DM MJ-1 PAR)
+K: 0.6               # Extinction coefficient of canopy (m2 ground m-2 leaf)
+ROOTDM: 1.2          # Maximum rooting depth (m)
+RRDMAX: 0.012        # Maximum leaf death rate due to senescence (d-1)
+TCNT: 10.            # Time coefficient of N translocation (d)
+RNFRT: 0.002         # Residual fraction of N in roots (g N g-1 DM)
+RNFST: 0.002         # Residual fraction of N in stems (g N g-1 DM)
+RNFLV: 0.004         # Residual fraction of N in leaves (g N g-1 DM)
+FNTRT: 0.15          # Fraction of root N to the amount of N in stems and leaves that is translocatable (g N g-1 N).
+NLUE: 0.20           # Parameter to describe the relationship between Nitrogen Nutrition Index and total dry matter
+                     # production (-)
+NLAI: 1.0            # Parameter to describe the relationship between Nitrogen Nutrition Index and leaf area growth (-)
+NSLA: 1.0            # Parameter to describe the relationship between Nitrogen Nutrition Index and specific leaf area
+                     # (-)
+NPART: 1.0           # Parameter to describe the relationship between biomass partitioning fractions and the Nitrogen
+                     # Nutrition Index under nitrogen limited conditions, if the Nitrogne Nutrition Index is smaller
+                     # than the reduction factor of transpiration (-)
  
 # Interpolation functions
 # -----------------------
+
+# Reduction factor of development rate as a function of photosynthetic daylength (d, -)
 PHOTTB:
   [0.0, 0.0,
    8., 1.0,
    10., 1.0,
    12., 1.0,
    18., 1.0]
- 
+
+# Releative death rate of roots as a function of temperature (d, d-1)
 RDRT:
   [-10., 0.00,
    10., 0.02,
    15., 0.03,
    30., 0.05,
    50., 0.09]
- 
+
+# Reduction factor of specific leaf area as a function of development stage (-,  -)
 SLACF:
   [0.0, 1.0,
    2.0, 1.0,
    2.1, 1.0]
- 
+
+# Maximum leaf nitrogen concentration as a function of development stage (-, g N g-1 DM)
 NMXLV:
   [0.0, 0.06,
    0.4, 0.04,
@@ -74,7 +84,8 @@ NMXLV:
    1.0, 0.02,
    2.0, 0.014,
    2.1, 0.014]
- 
+
+# Fraction of newly produced dry matter that is partitioned to roots as function of development stage (-, g DM g-1 DM)
 FRTTB:
   [0.0, 0.60,
    0.33, 0.58,
@@ -82,7 +93,8 @@ FRTTB:
    0.80, 0.10,
    1.00, 0.00,
    2.00, 0.0]
- 
+
+# Fraction of newly produced dry matter that is partitioned to leaves as function of development stage (-, g DM g-1 DM)
 FLVTB:
   [0.0, 0.40,
    0.33, 0.42,
@@ -91,7 +103,8 @@ FLVTB:
    1.00, 0.10,
    1.01, 0.00,
    2.00, 0.00]
- 
+
+# Fraction of newly produced dry matter that is partitioned to stems as function of development stage (-, g DM g-1 DM)
 FSTTB:
   [0.0, 0.00,
    0.33, 0.00,
@@ -100,7 +113,9 @@ FSTTB:
    1.00, 0.90,
    1.01, 0.25,
    2.00, 0.00]
- 
+
+# Fraction of newly produced dry matter that is partitioned to storage organs as function of development stage
+# (-, g DM g-1 DM)
 FSOTB:
  [0.0, 0.00,
   0.33, 0.00,
